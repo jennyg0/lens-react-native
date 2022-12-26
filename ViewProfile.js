@@ -6,12 +6,12 @@ export default function ViewProfile({ route, navigation }) {
       profile={route.params.profile}
       onFollowingPress={(profile) => {
         //console.log("PROFILE:::: ", profile);
-        navigation.push("ViewFollowing", {
+        navigation.push("Following", {
           ethereumAddress: profile.ownedBy,
         });
       }}
       onProfileImagePress={(publication) => {
-        navigation.push("ViewProfile", {
+        navigation.push("Profile", {
           profile: publication.profile,
         });
       }}
@@ -19,7 +19,7 @@ export default function ViewProfile({ route, navigation }) {
         const publicationId = publication.mirrorOf
           ? publication.mirrorOf.id
           : publication.id;
-        navigation.push("ViewComments", {
+        navigation.push("Comments", {
           publicationId,
         });
       }}
