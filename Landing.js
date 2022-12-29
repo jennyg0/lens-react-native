@@ -1,22 +1,18 @@
 import React from "react";
-import { Button, SafeAreaView, StyleSheet, Text } from "react-native";
+import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
 
 export default function LandingComponent() {
+  const onPressLogin = () => console.log("hello");
+  const onPressSignup = () => console.log("hello");
   return (
     <SafeAreaView>
-      <Text> 🥵</Text>
-      <Text>TAKES</Text>
-      <Pressable style={styles.button} onPress={onPress}>
+      <Text style={styles.header}> 🥵 takes</Text>
+      <Pressable style={styles.button} onPress={onPressLogin}>
         <Text style={styles.text}>Login</Text>
       </Pressable>
-
-      <Button title="Login" color="#841584" accessibilityLabel="Login" />
-      <Button
-        title="Signup"
-        color="#841584"
-        accessibilityLabel="Signup"
-        style={styles.button}
-      />
+      <Pressable style={styles.button} onPress={onPressSignup}>
+        <Text style={styles.text}>Signup</Text>
+      </Pressable>
     </SafeAreaView>
   );
 }
@@ -24,8 +20,9 @@ export default function LandingComponent() {
 const styles = StyleSheet.create({
   header: {
     height: 40,
-    margin: 12,
-    borderWidth: 1,
+    margin: "auto",
+    fontSize: 30,
+    lineHeight: 40,
     padding: 10,
   },
   button: {
@@ -35,7 +32,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "black",
+    backgroundColor: "red",
+    width: "30%",
+    margin: "auto",
+    marginTop: 3,
   },
   text: {
     fontSize: 16,

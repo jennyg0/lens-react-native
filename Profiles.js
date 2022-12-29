@@ -1,5 +1,4 @@
 import { Profiles } from "@lens-protocol/react-native-lens-ui-kit";
-import { MyTabs } from "./BottomNav";
 
 const ProfileComponent = ({ navigation }) => {
   return (
