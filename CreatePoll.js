@@ -48,7 +48,7 @@ const CreatePollComponent = ({ navigation }) => {
         title="Create"
         color="#841584"
         accessibilityLabel="Create a poll with this button"
-      ></Button>
+      />
     </SafeAreaView>
   );
 };

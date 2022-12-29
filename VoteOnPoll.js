@@ -22,7 +22,7 @@ export default function VoteOnPollComponent({ route, navigation }) {
         title={optionOne}
         color="#841584"
         //accessibilityLabel={`Vote for ${Option1}`}
-      ></Button>
+      />
       <Text>Votes: {optionOneCount}</Text>
       <Button
         onPress={() =>
@@ -31,7 +31,7 @@ export default function VoteOnPollComponent({ route, navigation }) {
         title={optionTwo}
         color="#841584"
         //accessibilityLabel={`Vote for ${Option2}`}
-      ></Button>
+      />
       <Text>Votes: {optionTwoCount}</Text>
     </SafeAreaView>
   );
