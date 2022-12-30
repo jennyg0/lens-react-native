@@ -3,15 +3,18 @@ import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
 
 export default function LandingComponent() {
   const onPressLogin = () => console.log("hello");
-  const onPressSignup = () => console.log("hello");
+  const onPressCreate = () => console.log("hello");
   return (
     <SafeAreaView>
-      <Text style={styles.header}> 🥵 takes</Text>
-      <Pressable style={styles.button} onPress={onPressLogin}>
+      <Text style={styles.header}> atm </Text>
+      {/* <Pressable style={styles.button} onPress={onPressLogin}>
         <Text style={styles.text}>Login</Text>
       </Pressable>
       <Pressable style={styles.button} onPress={onPressSignup}>
         <Text style={styles.text}>Signup</Text>
+      </Pressable> */}
+      <Pressable style={styles.button} onPress={onPressCreate}>
+        <Text style={styles.text}>Create a Moment</Text>
       </Pressable>
     </SafeAreaView>
   );
@@ -32,7 +35,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     borderRadius: 4,
     elevation: 3,
-    backgroundColor: "red",
+    backgroundColor: "purple",
     width: "30%",
     margin: "auto",
     marginTop: 3,
