@@ -1,21 +1,12 @@
-import {
-  LivepeerConfig,
-  createReactClient,
-  studioProvider,
-} from "@livepeer/react-native";
-import * as React from "react";
+// import { createReactClient, studioProvider } from "@livepeer/react-native";
 
-const livepeerClient = createReactClient({
-  provider: studioProvider({
-    apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY,
-  }),
-});
+// const client = createReactClient({
+//   provider: studioProvider({
+//     apiKey: "process.env.NEXT_PUBLIC_STUDIO_API_KEY",
+//   }),
+// });
 
-// Pass client to React Context Provider
-function App() {
-  return (
-    <LivepeerConfig client={livepeerClient}>
-      <DecentralizedStoragePlayback />
-    </LivepeerConfig>
-  );
-}
+// // Pass client to React Context Provider
+// export default function LivepeerProvider({ children }) {
+//   return <LivepeerConfig client={client}>{children}</LivepeerConfig>;
+// }
