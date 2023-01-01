@@ -1,15 +1,25 @@
 import { StyleSheet } from "react-native";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { LensProvider } from "@lens-protocol/react-native-lens-ui-kit";
-import { LivepeerProvider } from "./Livepeer";
 import BottomNav from "./BottomNav";
+import {
+  createReactClient,
+  LivepeerConfig,
+  studioProvider,
+} from "@livepeer/react-native";
+
+const client = createReactClient({
+  provider: studioProvider({ apiKey }),
+});
 
 export default function App() {
   return (
     <LensProvider environment="testnet">
-      <NavigationContainer>
-        <BottomNav />
-      </NavigationContainer>
+      <LivepeerConfig client={client}>
+        <NavigationContainer>
+          <BottomNav />
+        </NavigationContainer>
+      </LivepeerConfig>
     </LensProvider>
   );
 }
