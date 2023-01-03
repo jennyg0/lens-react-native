@@ -1,5 +1,10 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { ProfileStackNavigator } from "./Navigation";
+import {
+  FeedStackNavigator,
+  NotificationStackNavigator,
+  ProfileStackNavigator,
+  UploadStackNavigator,
+} from "./Navigation";
 
 const Tab = createBottomTabNavigator();
 
@@ -9,22 +14,22 @@ export default function BottomNav() {
       <Tab.Screen
         name="Feed"
         options={{ headerShown: false }}
-        component={ProfileStackNavigator}
+        component={FeedStackNavigator}
       />
       <Tab.Screen
-        name="Search"
+        name="My Profile"
         options={{ headerShown: false }}
         component={ProfileStackNavigator}
       />
       <Tab.Screen
         name="Activity"
         options={{ headerShown: false }}
-        component={ProfileStackNavigator}
+        component={NotificationStackNavigator}
       />
       <Tab.Screen
-        name="Profile"
+        name="Create"
         options={{ headerShown: false }}
-        component={ProfileStackNavigator}
+        component={UploadStackNavigator}
       />
     </Tab.Navigator>
   );

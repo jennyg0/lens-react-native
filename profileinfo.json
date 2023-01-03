@@ -1,0 +1,106 @@
+{
+  "publication": {
+    "__typename": "Post",
+    "appId": "lenster",
+    "collectModule": {
+      "__typename": "FreeCollectModuleSettings",
+      "contractAddress": "0x0BE6bD7092ee83D44a6eC1D949626FeE48caB30c",
+      "followerOnly": true,
+      "type": "FreeCollectModule"
+    },
+    "createdAt": "2023-01-02T19:58:06.000Z",
+    "hasCollectedByMe": false,
+    "hidden": false,
+    "id": "0x6039-0x01",
+    "isGated": false,
+    "metadata": {
+      "__typename": "MetadataOutput",
+      "attributes": [
+        {
+          "__typename": "MetadataAttributeOutput",
+          "displayType": null,
+          "traitType": "type",
+          "value": "post"
+        }
+      ],
+      "content": "gm (🌿, 🌿)",
+      "description": "gm (🌿, 🌿)",
+      "encryptionParams": null,
+      "media": [],
+      "name": "Post by @donosonaumczuk"
+    },
+    "mirrors": [],
+    "profile": {
+      "__typename": "Profile",
+      "attributes": [],
+      "bio": null,
+      "coverPicture": null,
+      "dispatcher": null,
+      "followModule": null,
+      "followNftAddress": null,
+      "handle": "jengo.test",
+      "id": "0x6039",
+      "isDefault": false,
+      "isFollowedByMe": false,
+      "isFollowing": false,
+      "metadata": null,
+      "name": null,
+      "onChainIdentity": {
+        "__typename": "OnChainIdentity",
+        "ens": {
+          "__typename": "EnsOnChainIdentity",
+          "name": null
+        },
+        "proofOfHumanity": false,
+        "sybilDotOrg": {
+          "__typename": "SybilDotOrgIdentity",
+          "source": {
+            "__typename": "SybilDotOrgIdentitySource",
+            "twitter": {
+              "__typename": "SybilDotOrgTwitterIdentity",
+              "handle": null
+            }
+          },
+          "verified": false
+        },
+        "worldcoin": {
+          "__typename": "WorldcoinIdentity",
+          "isHuman": false
+        }
+      },
+      "ownedBy": "0x31e2D52aE5A0760E2f9cab4D388Ba1F457814275",
+      "picture": {
+        "__typename": "MediaSet",
+        "medium": null,
+        "original": {
+          "__typename": "Media",
+          "height": null,
+          "mimeType": null,
+          "url": "https://ipfs.io/ipfs/QmY9dUwYu67puaWBMxRKW98LPbXCznPwHUbhX5NeWnCJbX",
+          "width": null
+        },
+        "small": null
+      },
+      "stats": {
+        "__typename": "ProfileStats",
+        "totalCollects": 0,
+        "totalComments": 0,
+        "totalFollowers": 0,
+        "totalFollowing": 0,
+        "totalMirrors": 0,
+        "totalPosts": 1,
+        "totalPublications": 1
+      }
+    },
+    "profileSet": true,
+    "reaction": null,
+    "referenceModule": null,
+    "stats": {
+      "__typename": "PublicationStats",
+      "totalAmountOfCollects": 0,
+      "totalAmountOfComments": 0,
+      "totalAmountOfMirrors": 0,
+      "totalUpvotes": 0
+    }
+  }
+}

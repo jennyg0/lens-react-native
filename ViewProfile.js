@@ -1,6 +1,7 @@
 import { Profile } from "@lens-protocol/react-native-lens-ui-kit";
 
 export default function ViewProfile({ route, navigation }) {
+  console.log(route.params.profile, "here");
   return (
     <Profile
       profile={route.params.profile}

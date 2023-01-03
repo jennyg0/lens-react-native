@@ -4,11 +4,14 @@ import LandingComponent from "./Landing";
 import FeedComponent from "./Feed";
 import ProfileComponent from "./Profiles";
 import ViewProfile from "./ViewProfile";
+import CurrentProfileComponent from "./ProfileCurrentUser";
 import ViewComments from "./ViewComments";
 import ViewFollowing from "./ViewFollowing";
 import ViewFollowers from "./ViewFollowers";
+import NotificationComponent from "./Notifications";
 import CreatePollComponent from "./CreatePoll";
 import VoteOnPollComponent from "./VoteOnPoll";
+import VideoUpload from "./VideoUpload";
 
 const Stack = createNativeStackNavigator();
 
@@ -25,10 +28,35 @@ const Stack = createNativeStackNavigator();
 //   );
 // };
 
+const NotificationStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Notifications" component={NotificationComponent} />
+    </Stack.Navigator>
+  );
+};
+
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Home" component={ProfileComponent} />
+      <Stack.Screen name="Profiles" component={CurrentProfileComponent} />
+      <Stack.Screen name="Profile" component={ViewProfile} />
+    </Stack.Navigator>
+  );
+};
+
+const UploadStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Record" component={VideoUpload} />
+    </Stack.Navigator>
+  );
+};
+
+const FeedStackNavigator = () => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="My Feed" component={FeedComponent} />
       <Stack.Screen name="Profile" component={ViewProfile} />
       <Stack.Screen name="Comments" component={ViewComments} />
       <Stack.Screen name="Following" component={ViewFollowing} />
@@ -37,7 +65,12 @@ const ProfileStackNavigator = () => {
   );
 };
 
-export { ProfileStackNavigator };
+export {
+  FeedStackNavigator,
+  NotificationStackNavigator,
+  ProfileStackNavigator,
+  UploadStackNavigator,
+};
 
 /* <Stack.Navigator>
   <Stack.Screen name="Home" component={CreatePollComponent} />
