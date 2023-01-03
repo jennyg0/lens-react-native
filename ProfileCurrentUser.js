@@ -1,15 +1,26 @@
 import React from "react";
 import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
 import { ProfileHeader } from "@lens-protocol/react-native-lens-ui-kit";
+import { Player } from "@livepeer/react-native";
 
 export default function CurrentProfileComponent() {
   const profile = "0x6039";
+  const currentMoment = "";
 
   return (
     <SafeAreaView>
       <ProfileHeader profileId={profile} styles={baseStyles} />
       {/* <Text style={styles.text}>"busy 👩‍💻"</Text>
       <Pressable>Update Status</Pressable> */}
+      {currentMoment ? (
+        <Player
+          title="current moment"
+          showTitle={false}
+          playbackId={currentMoment}
+          aspectRatio="1to1"
+          loop
+        />
+      ) : null}
     </SafeAreaView>
   );
 }
@@ -25,7 +36,7 @@ const baseStyles = StyleSheet.create({
   container: {},
   blankHeader: {
     height: 120,
-    backgroundColor: "black",
+    backgroundColor: "green",
   },
   headerImage: {
     width: "10%",

@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Button } from "react-native";
 import { Camera } from "expo-camera";
 import { Video } from "expo-av";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Recorder() {
   const [hasAudioPermission, setHasAudioPermission] = useState(null);
@@ -11,6 +12,7 @@ export default function Recorder() {
   const [type, setType] = useState(Camera.Constants.Type.back);
   const video = useRef(null);
   const [status, setStatus] = useState({});
+  const navigation = useNavigation();
 
   useEffect(() => {
     (async () => {
@@ -28,7 +30,7 @@ export default function Recorder() {
         maxDuration: 10,
       });
       setRecordingUri(data.uri);
-      console.log(data.uri);
+      //console.log(data.uri);
     }
   };
 
@@ -47,13 +49,13 @@ export default function Recorder() {
     return <Text>No access to camera</Text>;
   }
   return (
-    <View style={{ flex: 1 }}>
+    <View style={styles.mainContainer}>
       <View style={styles.cameraContainer}>
         <Camera
           ref={(ref) => setCamera(ref)}
           style={styles.fixedRatio}
           type={type}
-          ratio={"4:3"}
+          ratio={"16:9"}
         />
       </View>
       <Video
@@ -76,27 +78,28 @@ export default function Recorder() {
               : video.current.playAsync()
           }
         />
+        <Button
+          title="Flip"
+          onPress={() => {
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            );
+          }}
+        ></Button>
+        <Button title="Start" onPress={() => takeVideo()} />
+        <Button title="Stop" onPress={() => stopVideo()} />
+        <Button title="Post" onPress={() => postVideo(recordingUri)} />
+        <Button title="Upload" onPress={() => navigation.navigate("Upload")} />
       </View>
-      <Button
-        title="Flip"
-        onPress={() => {
-          setType(
-            type === Camera.Constants.Type.back
-              ? Camera.Constants.Type.front
-              : Camera.Constants.Type.back
-          );
-        }}
-      ></Button>
-      <Button title="Start Recording" onPress={() => takeVideo()} />
-      <Button title="Stop Recording" onPress={() => stopVideo()} />
-      <Button title="Post Moment" onPress={() => postVideo(recordingUri)} />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   cameraContainer: {
-    flex: 1,
+    //flex: 1,
     flexDirection: "row",
   },
   fixedRatio: {
@@ -111,6 +114,11 @@ const styles = StyleSheet.create({
   buttons: {
     flexDirection: "row",
     justifyContent: "center",
-    alignItems: "center",
+    // alignItems: "center",
+  },
+  mainContainer: {
+    //flex: 2,
+    display: "flex",
+    justifyContent: "space-between",
   },
 });

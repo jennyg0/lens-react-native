@@ -17,7 +17,7 @@ export default function BottomNav() {
         component={FeedStackNavigator}
       />
       <Tab.Screen
-        name="My Profile"
+        name="Profile"
         options={{ headerShown: false }}
         component={ProfileStackNavigator}
       />

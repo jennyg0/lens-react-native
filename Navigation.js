@@ -11,7 +11,8 @@ import ViewFollowers from "./ViewFollowers";
 import NotificationComponent from "./Notifications";
 import CreatePollComponent from "./CreatePoll";
 import VoteOnPollComponent from "./VoteOnPoll";
-import VideoUpload from "./VideoUpload";
+import PostVideo from "./VideoPost";
+import UploadVideoPage from "./VideoUploadPage";
 
 const Stack = createNativeStackNavigator();
 
@@ -39,8 +40,7 @@ const NotificationStackNavigator = () => {
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Profiles" component={CurrentProfileComponent} />
-      <Stack.Screen name="Profile" component={ViewProfile} />
+      <Stack.Screen name="My Profile" component={CurrentProfileComponent} />
     </Stack.Navigator>
   );
 };
@@ -48,7 +48,8 @@ const ProfileStackNavigator = () => {
 const UploadStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="Record" component={VideoUpload} />
+      <Stack.Screen name="Record" component={PostVideo} />
+      <Stack.Screen name="Upload" component={UploadVideoPage} />
     </Stack.Navigator>
   );
 };

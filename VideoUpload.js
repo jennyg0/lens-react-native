@@ -1,44 +1,68 @@
+import { View, Text, Pressable, StyleSheet } from "react-native";
 import React, { useState } from "react";
-import VideoPicker from "./VideoPicker";
-import VideoRecord from "./VideoRecord";
-// import Input from "../../components/shared/Input";
-// import Button from "../../components/shared/Button";
 import * as ImagePicker from "expo-image-picker";
-import { useCreateAsset } from "@livepeer/react-native";
-import {
-  Button,
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  Input,
-  View,
-} from "react-native";
+import { Video } from "expo-av";
 
-export default function VideoUpload() {
-  const [media, setMedia] = useState();
-  const [title, setTitle] = useState();
-  const [loading, setLoading] = useState();
-  const {
-    mutate: createAsset,
-    data: assets,
-    status,
-    progress,
-    error,
-  } = useCreateAsset({ sources: [{ name: title, file: media?.uri }] });
+export default function UploadVideo({ onChange }) {
+  const [video, setVideo] = useState();
 
-  const onMediaChange = (result) => {
-    setMedia(result);
-  };
-
-  const onSubmit = async () => {
-    createAsset?.();
+  const pickVideo = async () => {
+    if (!video) {
+      const { status } =
+        await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        alert("Sorry, we need camera roll permissions to make this work!");
+        return;
+      }
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ImagePicker.MediaTypeOptions.Videos,
+        allowsEditing: false,
+        aspect: [4, 3],
+        quality: 1,
+      });
+      if (!result.canceled) {
+        onChange(result);
+        setVideo(result);
+      }
+    }
   };
 
   return (
-    <SafeAreaView>
-      {/* <VideoPicker onChange={onMediaChange} />
-      <Button title="upload" onPress={onSubmit} /> */}
-      <VideoRecord />
-    </SafeAreaView>
+    <Pressable onPress={pickVideo} style={styles.container}>
+      {video?.uri ? (
+        <Video
+          source={{ uri: video?.uri }}
+          rate={1.0}
+          volume={1.0}
+          isMuted={false}
+          shouldPlay
+          useNativeControls={true}
+          isLooping
+          style={styles.video}
+        />
+      ) : (
+        <Text style={styles.text}>Select a video to upload</Text>
+      )}
+    </Pressable>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    borderColor: "#333",
+    borderWidth: 1,
+    height: 200,
+    alignItems: "center",
+    justifyContent: "center",
+    borderStyle: "dashed",
+    borderRadius: 10,
+  },
+  text: {
+    fontSize: 15,
+  },
+  video: {
+    width: "95%",
+    height: "95%",
+    borderRadius: 10,
+  },
+});
