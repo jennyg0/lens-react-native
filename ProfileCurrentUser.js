@@ -6,7 +6,8 @@ import { Player } from "@livepeer/react-native";
 export default function CurrentProfileComponent() {
   const profile = "0x6039";
   const currentMoment = "";
-
+  //const src =
+  ("https://ipfs.livepeer.studio/ipfs/QmURv3J5BGsz23GaCUm7oXncm2M9SCj8RQDuFPGzAFSJw8");
   return (
     <SafeAreaView>
       <ProfileHeader profileId={profile} styles={baseStyles} />
@@ -16,6 +17,7 @@ export default function CurrentProfileComponent() {
         <Player
           title="current moment"
           showTitle={false}
+          src={src}
           playbackId={currentMoment}
           aspectRatio="1to1"
           loop

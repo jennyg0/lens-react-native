@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { StyleSheet, Text, View, Button } from "react-native";
+import { StyleSheet, Text, View, Pressable } from "react-native";
 import { Camera } from "expo-camera";
 import { Video } from "expo-av";
 import { useNavigation } from "@react-navigation/native";
@@ -70,16 +70,18 @@ export default function Recorder() {
         onPlaybackStatusUpdate={(status) => setStatus(() => status)}
       />
       <View style={styles.buttons}>
-        <Button
-          title={status.isPlaying ? "Pause" : "Play"}
+        <Pressable
+          style={styles.pressable}
           onPress={() =>
             status.isPlaying
               ? video.current.pauseAsync()
               : video.current.playAsync()
           }
-        />
-        <Button
-          title="Flip"
+        >
+          <Text style={styles.text}>{status.isPlaying ? "Pause" : "Play"}</Text>
+        </Pressable>
+        <Pressable
+          style={styles.pressable}
           onPress={() => {
             setType(
               type === Camera.Constants.Type.back
@@ -87,11 +89,27 @@ export default function Recorder() {
                 : Camera.Constants.Type.back
             );
           }}
-        ></Button>
-        <Button title="Start" onPress={() => takeVideo()} />
-        <Button title="Stop" onPress={() => stopVideo()} />
-        <Button title="Post" onPress={() => postVideo(recordingUri)} />
-        <Button title="Upload" onPress={() => navigation.navigate("Upload")} />
+        >
+          <Text style={styles.text}>Flip</Text>
+        </Pressable>
+        <Pressable style={styles.pressable} onPress={() => takeVideo()}>
+          <Text style={styles.text}>Start</Text>
+        </Pressable>
+        <Pressable style={styles.pressable} onPress={() => stopVideo()}>
+          <Text style={styles.text}>Stop</Text>
+        </Pressable>
+        <Pressable
+          style={styles.pressable}
+          onPress={() => postVideo(recordingUri)}
+        >
+          <Text style={styles.text}>Post</Text>
+        </Pressable>
+        <Pressable
+          style={styles.pressableUpload}
+          onPress={() => navigation.navigate("Upload")}
+        >
+          <Text style={styles.textUpload}>Upload</Text>
+        </Pressable>
       </View>
     </View>
   );
@@ -113,8 +131,35 @@ const styles = StyleSheet.create({
   },
   buttons: {
     flexDirection: "row",
-    justifyContent: "center",
+    //justifyContent: "space-around",
     // alignItems: "center",
+  },
+  pressable: {
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    borderRadius: 4,
+    elevation: 3,
+    backgroundColor: "black",
+  },
+  pressableUpload: {
+    paddingVertical: 12,
+    paddingHorizontal: 12,
+    border: "black",
+    borderRadius: 4,
+    elevation: 3,
+  },
+  text: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
+    color: "white",
+  },
+  textUpload: {
+    fontSize: 16,
+    lineHeight: 21,
+    fontWeight: "bold",
+    letterSpacing: 0.25,
   },
   mainContainer: {
     //flex: 2,
