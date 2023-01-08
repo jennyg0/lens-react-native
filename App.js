@@ -1,4 +1,3 @@
-import { StyleSheet } from "react-native";
 import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { LensProvider } from "@lens-protocol/react-native-lens-ui-kit";
 import BottomNav from "./BottomNav";
@@ -23,12 +22,3 @@ export default function App() {
     </LensProvider>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
