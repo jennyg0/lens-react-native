@@ -10,10 +10,12 @@ import {
 import { Camera } from "expo-camera";
 import { Video } from "expo-av";
 import { useNavigation } from "@react-navigation/native";
-import { useCreateAsset } from "@livepeer/react-native";
+
 import { useIsFocused } from "@react-navigation/core";
 import { Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import * as MediaLibrary from "expo-media-library";
+import * as VideoThumbnails from "expo-video-thumbnails";
 
 export default function Recorder() {
   const [hasAudioPermission, setHasAudioPermission] = useState(null);
@@ -29,16 +31,6 @@ export default function Recorder() {
   const navigation = useNavigation();
   const isFocused = useIsFocused();
 
-  const {
-    mutate: createAsset,
-    data: assets,
-    status,
-    progress,
-    error,
-  } = useCreateAsset(
-    video ? { sources: [{ name: "demo", file: recordingUri }] } : null
-  );
-
   useEffect(() => {
     (async () => {
       const cameraStatus = await Camera.requestCameraPermissionsAsync();
@@ -50,26 +42,39 @@ export default function Recorder() {
       const galleryStatus =
         await ImagePicker.requestMediaLibraryPermissionsAsync();
       setHasGalleryPermissions(galleryStatus.status == "granted");
+
+      if (galleryStatus.status == "granted") {
+        const userGalleryMedia = await MediaLibrary.getAssetsAsync({
+          sortBy: ["creationTime"],
+          mediaType: ["video"],
+        });
+        setGalleryItems(userGalleryMedia.assets);
+      }
     })();
   }, []);
 
   const takeVideo = async () => {
     if (camera) {
-      const data = await camera.recordAsync({
-        maxDuration: 10,
-      });
-      setRecordingUri(data.uri);
-      //console.log(data.uri);
+      try {
+        const videoRecord = await camera.recordAsync({
+          maxDuration: 10,
+        });
+        if (videoRecord) {
+          const data = await videoRecord;
+          const source = data.uri;
+          let sourceThumb = await generateThumbnail(source);
+          navigation.navigate("Post", { source, sourceThumb });
+        }
+      } catch (error) {
+        console.warn(error);
+      }
     }
   };
 
   const stopVideo = async () => {
-    camera.stopRecording();
-  };
-
-  const postVideo = async (uri) => {
-    console.log(uri);
-    createAsset?.();
+    if (camera) {
+      camera.stopRecording();
+    }
   };
 
   const pickFromCameraRoll = async () => {
@@ -79,6 +84,17 @@ export default function Recorder() {
       aspect: [16, 9],
       quality: 1,
     });
+  };
+
+  const generateThumbnail = async (source) => {
+    try {
+      const { uri } = await VideoThumbnails.getThumbnailAsync(source, {
+        time: 2000,
+      });
+      return uri;
+    } catch (e) {
+      console.warn(e);
+    }
   };
 
   if (hasCameraPermission === null || hasAudioPermission === null) {
@@ -103,18 +119,6 @@ export default function Recorder() {
         <TouchableOpacity
           style={styles.sideButtons}
           onPress={() =>
-            setType(
-              type === Camera.Constants.Type.back
-                ? Camera.Constants.Type.front
-                : Camera.Constants.Type.back
-            )
-          }
-        >
-          <Feather name="refresh-ccw" size={24} color={"white"} />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.sideBarButtons}
-          onPress={() =>
             setFlash(
               flash === Camera.Constants.FlashMode.off
                 ? Camera.Constants.FlashMode.torch
@@ -124,12 +128,24 @@ export default function Recorder() {
         >
           <Feather name="zap" size={24} color={"white"} />
         </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.sideButtons}
+          onPress={() =>
+            setType(
+              type === Camera.Constants.Type.back
+                ? Camera.Constants.Type.front
+                : Camera.Constants.Type.back
+            )
+          }
+        >
+          <Feather name="refresh-ccw" size={24} color={"white"} />
+        </TouchableOpacity>
       </View>
       <View style={styles.bottomButtons}>
         <View style={{ flex: 1 }}></View>
         <View style={styles.recordContainer}>
           <TouchableOpacity
-            onLongPress={() => recordVideo()}
+            onLongPress={() => takeVideo()}
             onPressOut={() => stopVideo()}
             style={styles.recordButton}
           />
@@ -168,7 +184,7 @@ const styles = StyleSheet.create({
     right: 0,
     marginHorizontal: 20,
     position: "absolute",
-    top: 60,
+    top: 50,
   },
   bottomButtons: {
     alignItems: "center",
@@ -176,6 +192,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     flexDirection: "row",
     marginBottom: 30,
+    width: "100%",
   },
   recordContainer: {
     flex: 1,
@@ -193,7 +210,7 @@ const styles = StyleSheet.create({
   },
   sideButtons: {
     alignItems: "center",
-    marginBottom: 25,
+    marginBottom: 35,
   },
   galleryButton: {
     borderWidth: 2,

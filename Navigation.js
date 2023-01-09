@@ -12,7 +12,9 @@ import NotificationComponent from "./Notifications";
 import CreatePollComponent from "./CreatePoll";
 import VoteOnPollComponent from "./VoteOnPoll";
 import PostVideo from "./VideoPost";
+import PlayerComponent from "./Player";
 import UploadVideoPage from "./VideoUploadPage";
+import SaveVideoComponent from "./SaveVideo";
 import LinearGradient from "react-native-linear-gradient";
 import { StyleSheet, View, Header } from "react-native";
 
@@ -68,7 +70,8 @@ const NotificationStackNavigator = () => {
 const ProfileStackNavigator = () => {
   return (
     <Stack.Navigator>
-      <Stack.Screen name="My Profile" component={CurrentProfileComponent} />
+      <Stack.Screen name="My Moments" component={CurrentProfileComponent} />
+      <Stack.Screen name="Player" component={PlayerComponent} />
     </Stack.Navigator>
   );
 };
@@ -78,6 +81,7 @@ const UploadStackNavigator = () => {
     <Stack.Navigator>
       <Stack.Screen name="Record" component={PostVideo} />
       <Stack.Screen name="Upload" component={UploadVideoPage} />
+      <Stack.Screen name="Post" component={SaveVideoComponent} />
     </Stack.Navigator>
   );
 };
