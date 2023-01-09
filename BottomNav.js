@@ -10,7 +10,6 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 const Tab = createBottomTabNavigator();
 
 export default function BottomNav() {
-  // const color = "blue";
   return (
     <Tab.Navigator>
       <Tab.Screen

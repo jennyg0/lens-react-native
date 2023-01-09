@@ -1,36 +1,113 @@
-import React from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
+import { Pressable, StyleSheet, Text, View, Image } from "react-native";
 import { ProfileHeader } from "@lens-protocol/react-native-lens-ui-kit";
 import { Player } from "@livepeer/react-native";
+import { Feather } from "@expo/vector-icons";
+import img from "./greenery.jpeg";
 
-export default function CurrentProfileComponent() {
+export default function CurrentProfileComponent({ navigation }) {
   const profile = "0x6039";
-  const currentMoment = "";
-  //const src =
-  ("https://ipfs.livepeer.studio/ipfs/QmURv3J5BGsz23GaCUm7oXncm2M9SCj8RQDuFPGzAFSJw8");
+  const currentMoment = "12c0q69ljo73ofut/index.m3u8";
+  //const src ="https://ipfs.livepeer.studio/ipfs/QmURv3J5BGsz23GaCUm7oXncm2M9SCj8RQDuFPGzAFSJw8"
+  const janVids = [
+    {
+      uri: "https://lp-playback.com/hls/12c0q69ljo73ofut/index.m3u8",
+      image: img,
+    },
+    {
+      uri: "https://lp-playback.com/hls/12c0q69ljo73ofut/index.m3u8",
+      image: img,
+    },
+    {
+      uri: "https://lp-playback.com/hls/12c0q69ljo73ofut/index.m3u8",
+      image: img,
+    },
+    {
+      uri: "https://lp-playback.com/hls/12c0q69ljo73ofut/index.m3u8",
+      image: img,
+    },
+  ];
+
+  const playVideo = (source) => {
+    navigation.navigate("Player", { source });
+  };
+
   return (
-    <SafeAreaView>
+    <>
       <ProfileHeader profileId={profile} styles={baseStyles} />
       {/* <Text style={styles.text}>"busy 👩‍💻"</Text>
       <Pressable>Update Status</Pressable> */}
-      {currentMoment ? (
-        <Player
-          title="current moment"
-          showTitle={false}
-          src={src}
-          playbackId={currentMoment}
-          aspectRatio="1to1"
-          loop
-        />
-      ) : null}
-    </SafeAreaView>
+      <View style={styles.container}>
+        <Text style={styles.monthHeaders}>Jan 2023</Text>
+        <View style={styles.circleContainer}>
+          {janVids.map((elem, i) => {
+            return (
+              <Pressable key={i} onPress={() => playVideo(elem.uri)}>
+                <Image style={styles.circles} source={elem.image} size={2} />
+              </Pressable>
+            );
+          })}
+        </View>
+        <Text style={styles.monthHeaders}>Dec 2022</Text>
+        <View style={styles.circleContainer}>
+          {janVids.map((elem, i) => {
+            return (
+              <Pressable key={i} onPress={() => playVideo(elem.uri)}>
+                <Image style={styles.circles} source={elem.image} size={2} />
+              </Pressable>
+            );
+          })}
+        </View>
+        <View style={styles.circleContainer}>
+          {janVids.map((elem, i) => {
+            return (
+              <Pressable key={i} onPress={() => playVideo(elem.uri)}>
+                <Image style={styles.circles} source={elem.image} size={2} />
+              </Pressable>
+            );
+          })}
+        </View>
+        <View style={styles.circleContainer}>
+          {janVids.map((elem, i) => {
+            return (
+              <Pressable key={i} onPress={() => playVideo(elem.uri)}>
+                <Image style={styles.circles} source={elem.image} size={2} />
+              </Pressable>
+            );
+          })}
+        </View>
+      </View>
+    </>
   );
 }
 
 const styles = StyleSheet.create({
+  container: { paddingTop: 20 },
   text: {
     textAlign: "center",
     marginTop: 3,
+  },
+  playerView: {
+    // flexDirection: "row",
+    // borderRadius: "50%",
+    //width: 3,
+    backgroundColor: "black",
+  },
+  circleContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    height: 80,
+    paddingHorizontal: 20,
+  },
+  circles: {
+    flex: 0.73,
+    borderRadius: "50%",
+    marginHorizontal: 11,
+    width: 60,
+  },
+  monthHeaders: {
+    paddingLeft: 25,
+    paddingBottom: 20,
+    fontWeight: "bold",
   },
 });
 
