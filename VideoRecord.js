@@ -84,6 +84,14 @@ export default function Recorder() {
       aspect: [16, 9],
       quality: 1,
     });
+    if (!result.canceled) {
+      console.log(result.assets[0].uri);
+      let sourceThumb = await generateThumbnail(result.assets[0].uri);
+      navigation.navigate("Post", {
+        source: result.assets[0].uri,
+        sourceThumb,
+      });
+    }
   };
 
   const generateThumbnail = async (source) => {
