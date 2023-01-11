@@ -24,9 +24,7 @@ export default function SavePostScreen(props) {
 
   const navigation = useNavigation();
   const videoSource = props.route.params.source;
-
   const thumbnail = props.route.params.sourceThumb;
-  console.log(videoSource, thumbnail);
 
   const {
     mutate: createAsset,

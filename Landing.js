@@ -1,12 +1,13 @@
 import React from "react";
-import { Pressable, SafeAreaView, StyleSheet, Text } from "react-native";
+import { Pressable, View, StyleSheet, Text } from "react-native";
 
 export default function LandingComponent() {
   const onPressLogin = () => console.log("hello");
   const onPressCreate = () => console.log("hello");
   return (
-    <SafeAreaView>
+    <View>
       <Text style={styles.header}> atm </Text>
+      <Text style={styles.subheading}> share your moments </Text>
       {/* <Pressable style={styles.button} onPress={onPressLogin}>
         <Text style={styles.text}>Login</Text>
       </Pressable>
@@ -16,7 +17,7 @@ export default function LandingComponent() {
       <Pressable style={styles.button} onPress={onPressCreate}>
         <Text style={styles.text}>Create a Moment</Text>
       </Pressable>
-    </SafeAreaView>
+    </View>
   );
 }
 
@@ -26,6 +27,13 @@ const styles = StyleSheet.create({
     margin: "auto",
     fontSize: 30,
     lineHeight: 40,
+    padding: 10,
+  },
+  subheading: {
+    height: 20,
+    margin: "auto",
+    fontSize: 15,
+    lineHeight: 20,
     padding: 10,
   },
   button: {

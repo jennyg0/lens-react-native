@@ -8,7 +8,7 @@ import {
 } from "@livepeer/react-native";
 
 const client = createReactClient({
-  provider: studioProvider({ apiKey: process.env.NEXT_PUBLIC_STUDIO_API_KEY }),
+  provider: studioProvider({ apiKey: process.env.API_KEY_PUBLIC_STUDIO }),
 });
 
 export default function App() {
